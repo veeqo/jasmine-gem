@@ -43,6 +43,12 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'jasmine-core', '>= 2.8.0', '< 3.0.0'
   s.add_dependency 'rack', '>= 1.2.1'
-  s.add_dependency 'rake'
+
+  if ruby_version_less_than([2,0,0])
+    s.add_dependency 'rake', '< 12.3.0'
+  else
+    s.add_dependency 'rake'
+  end
+
   s.add_dependency 'phantomjs'
 end
