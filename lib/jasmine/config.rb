@@ -32,6 +32,11 @@ module Jasmine
       @config.add_rack_path(spec_path, lambda {
         sprockets_spec_env = Sprockets::Environment.new
         sprockets_spec_env.append_path @config.spec_dir
+        sprockets_spec_env.context_class.class_eval do
+          def asset_path(*args)
+            ActionController::Base.helpers.asset_path(*args)
+          end
+        end
         Rails.application.assets.paths.each do |path|
           sprockets_spec_env.append_path(path)
         end
